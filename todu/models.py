@@ -7,7 +7,6 @@ class ToduModel(models.Model):
     task_status = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
 
-
     def __str__(self):
         return self.task_name
 

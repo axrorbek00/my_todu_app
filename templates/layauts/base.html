@@ -1,13 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" {% static "bootstrap/css/bootstrap.min.css" %}>
-    <link rel="stylesheet" {% static "bootstrap-icons/font/bootstrap-icons.css" %}>
-    <link rel="stylesheet" {% static "main/css/main.css" %}>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static "bootstrap-icons/font/bootstrap-icons.css" %}">
+    <link rel="stylesheet" href="{% static "main/css/main.css" %}">
 </head>
 <body>
+{% include 'layauts/navbar.html' %}
+
 {% block content %}
 
 {% endblock %}
