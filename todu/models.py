@@ -3,7 +3,7 @@ from django.db import models
 
 class ToduModel(models.Model):
     task_name = models.CharField(max_length=225)
-    description = models.TextField
+    description = models.TextField()
     task_status = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
 

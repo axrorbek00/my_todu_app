@@ -1,0 +1,25 @@
+{% extends 'layauts/base.html' %}
+{% load crispy_forms_filters %}
+{#{% load crispy_forms_tags %}#}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header bg-dark-subtle">
+                        Creade task
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url "todu_create" %}" method="post">
+                            {% csrf_token %}
+                            {{ create_form|crispy }}
+                            {#{% crispy create_form %}#}
+                            <button class="btn btn-outline-primary px-4 py-2 " type="submit">create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
