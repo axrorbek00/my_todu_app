@@ -1,0 +1,33 @@
+{% extends 'layauts/base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header bg-dark-subtle">
+                        Task edit form
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'todu_edit' task.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Task name</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1"
+                                       name="task_name" value="{{ task.task_name }}"
+                                       placeholder="task name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                          rows="3" name="description">{{ task.description }}</textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-success">edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
