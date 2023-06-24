@@ -22,13 +22,31 @@
                             <tbody>
                             {% for task in tasks %}
                                 <tr>
-                                    <th scope="row">{{ forloop.counter}}</th>
-                                    <td class="">{{ task.task_name }}</td>
+                                    <th scope="row">{{ forloop.counter }}</th>
+
+                                    <td class="">
+                                            {% if task.task_status %}
+                                                <del>{{ task.task_name }}</del>
+                                            {% else %}
+                                                {{ task.task_name }}
+                                            {% endif %}
+
+                                    </td>
                                     <td class="">{{ task.created_at }}</td>
                                     <td>
-                                        <a href="{% url 'todu_delet' task.id %}" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
-                                        <a href="{% url 'todu_edit' task.id %}" class="btn btn-warning"><i class="bi-pen-fill text-white"></i></a>
-                                        <a href="{% url 'todu_detail' task.id %}" class="btn btn-info"><i class="bi-eye-fill text-white"></i></a>
+                                        <a href="{% url 'todu_delet' task.id %}" class="btn btn-secondary"><i
+                                                class="bi bi-trash-fill"></i></a>
+                                        <a href="{% url 'todu_edit' task.id %}" class="btn btn-warning"><i
+                                                class="bi-pen-fill text-white"></i></a>
+                                        <a href="{% url 'todu_detail' task.id %}" class="btn btn-info"><i
+                                                class="bi-eye-fill text-white"></i></a>
+                                        {% if task.task_status %}
+                                            <a href="{% url 'todu_check' task.id %}" class="btn btn-success"><i
+                                                    class="bi bi-check-circle-fill"></i></a>
+                                        {% else %}
+                                            <a href="{% url 'todu_check' task.id %}" class="btn btn-danger"><i
+                                                    class="bi bi-x-circle-fill"></i></a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

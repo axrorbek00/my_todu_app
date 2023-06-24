@@ -3,12 +3,24 @@ from .forms import CreateToduFormsModel, EditToduModelForm
 from .forms import ToduModel
 
 
+def todu_check_viuw(request, id):
+    obj = ToduModel.objects.all().get(id=id)
+    if obj.task_status:
+        obj.task_status = False
+    else:
+        obj.task_status = True
+    obj.save()
+    return redirect('todu_list')
+
+
 def todu_edit_view(request, id):
     obj = ToduModel.objects.all().get(id=id)
     if request.method == 'POST':
         form = EditToduModelForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            obj.task_name = form.cleaned_data['task_name']
+            obj.description = form.cleaned_data['description']
+            obj.save()
             return redirect('todu_list')
     return render(request, 'main/todu_edit.html', context={
         'task': obj
@@ -28,9 +40,13 @@ def todu_delete_view(request, id):
 
 
 def todu_list_view(request):
+    q = request.GET.get('q', '')
     tasks = ToduModel.objects.all()
+    if q:
+        tasks = tasks.filter(task_name__icontains=q)
     return render(request, 'main/todu_list.html', context={
-        'tasks': tasks
+        'tasks': tasks,
+        'q':q
     })
 
 
