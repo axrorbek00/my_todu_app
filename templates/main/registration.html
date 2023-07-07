@@ -1,0 +1,22 @@
+{% extends 'layauts/base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <div class="card-header bg-dark-subtle">
+                        Registration
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'registration' %}" method="post">
+                            {% csrf_token %}
+                            {{ registration_form|crispy }}
+                            <button class="btn btn-success px-5 py-2">save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

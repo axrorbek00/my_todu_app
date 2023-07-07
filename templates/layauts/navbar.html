@@ -1,31 +1,47 @@
 <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container">
-        <a class="navbar-brand text-white" href="#">Logo</a>
+        <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Todu app</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="{% url 'todu_list' %}">Todu app</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'todu_create' %}">Todu create</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link text-white">
-                        Dropdown
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled text-white">Disabled</a>
-                </li>
+
+                {% if  not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'registration' %}">
+                            Registration
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'todu_create' %}">Todu create</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Logaut</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'todu_list' %}">Todo list</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                {% endif %}
             </ul>
-        </div>
-        <form class="d-flex" role="search" method="get" >
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{ q }}" name="q">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
+            {% if request.path == '/todu/list/'%}
+                </div>
+                <form class="d-flex" role="search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                           value="{{ q }}"
+                           name="q">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                </div>
+            {% endif %}
+
 </nav>

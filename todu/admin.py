@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import ToduModel
+from .models import ToduModel,CategoriyModel
 
 
-# admin.site.register(ToduModel)
+admin.site.register(CategoriyModel)
 
 
 # Register your models here.

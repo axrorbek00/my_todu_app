@@ -15,6 +15,7 @@
                             {% csrf_token %}
                             {{ create_form|crispy }}
                             {#{% crispy create_form %}#}
+                            {{ create_form.media }}
                             <button class="btn btn-outline-primary px-4 py-2 " type="submit">create</button>
                         </form>
                     </div>
